@@ -26,7 +26,7 @@ export const TEAM: TeamMember[] = [
     name: 'Syed Shaheer Ali',
     designation: 'Founder & Chief Executive Officer',
     description: 'Visionary engineer focusing on scalable web platforms, cloud micro-architectures, and high-performance server structures.',
-    imageUrl: '10.png',
+    imageUrl: '/10.png',
     socials: {
       linkedin: 'https://www.linkedin.com/in/sshaheerali/',
       github: 'https://github.com/Shaheerali66',
@@ -38,7 +38,7 @@ export const TEAM: TeamMember[] = [
     name: 'Jawad Rajput',
     designation: 'Co-Founder & Head of E-Commerce',
     description: 'Award-winning digital craftsperson transforming abstract system structures into stunning visual narratives.',
-    imageUrl: '12.png',
+    imageUrl: '/12.png',
     socials: {
 
       linkedin: 'https://www.linkedin.com/in/muhammad-jawad-rajput-558025267/',
@@ -50,7 +50,7 @@ export const TEAM: TeamMember[] = [
     name: 'Zainab Memon',
     designation: 'Chief Marketing Officer',
     description: 'Interactive web front-runner obsessed with browser frames, smooth vector motion, and advanced physics canvases.',
-    imageUrl: '11.png',
+    imageUrl: '/11.png',
     socials: {
       linkedin: 'https://www.linkedin.com/in/zainab-memon-hr/',
       email: 'zainabmemonzcs@gmail.com',
