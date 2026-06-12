@@ -48,6 +48,7 @@ export default function Team() {
                     alt={member.name}
                     referrerPolicy="no-referrer"
                     className="w-full h-full object-cover transition-transform duration-700 ease-out group-hover:scale-102"
+                    loading="lazy"
                   />
 
                   {/* Subtle brand orange border outline inside image */}

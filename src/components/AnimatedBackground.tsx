@@ -65,9 +65,14 @@ export default function AnimatedBackground() {
     resize();
     window.addEventListener('resize', resize, { passive: true });
 
+    const isMobile = typeof window !== 'undefined' && window.innerWidth < 768;
+
     // ── 1. Ambient deep-space orbs ────────────────────────────────────────
     // Large, very soft blobs that drift slowly — the core of the "shader mesh" feel
-    const orbs: Orb[] = [
+    const orbs: Orb[] = isMobile ? [
+      { bx:0.15, by:0.22, r:0.62, col:'255,75,0',   sp:0.00014, ph:0.00, ax:0.09, ay:0.07 },
+      { bx:0.85, by:0.55, r:0.68, col:'255,115,0',  sp:0.00020, ph:2.09, ax:0.07, ay:0.08 },
+    ] : [
       { bx:0.15, by:0.22, r:0.62, col:'255,75,0',   sp:0.00014, ph:0.00, ax:0.09, ay:0.07 },
       { bx:0.85, by:0.55, r:0.68, col:'255,115,0',  sp:0.00020, ph:2.09, ax:0.07, ay:0.08 },
       { bx:0.50, by:0.88, r:0.50, col:'210,50,0',   sp:0.00017, ph:4.19, ax:0.06, ay:0.06 },
@@ -77,7 +82,9 @@ export default function AnimatedBackground() {
 
     // ── 2. Fluid light wave bands ─────────────────────────────────────────
     // Horizontal soft-edged bands that oscillate up/down
-    const waves: Wave[] = [
+    const waves: Wave[] = isMobile ? [
+      { by:0.28, amp:0.06, spd:0.00022, ph:0.00, col:'255,80,0',  op:0.045, w:0.18 },
+    ] : [
       { by:0.28, amp:0.06, spd:0.00022, ph:0.00, col:'255,80,0',  op:0.045, w:0.18 },
       { by:0.55, amp:0.04, spd:0.00030, ph:1.57, col:'255,110,0', op:0.035, w:0.14 },
       { by:0.78, amp:0.08, spd:0.00018, ph:3.14, col:'200,55,0',  op:0.030, w:0.22 },
@@ -86,8 +93,8 @@ export default function AnimatedBackground() {
     // ── 3. Dual-layer particles ───────────────────────────────────────────
     // Far layer: 22 tiny particles — slow, very low alpha — adds depth
     // Near layer: 18 medium particles — slightly faster, more visible
-    const FAR  = 22;
-    const NEAR = 18;
+    const FAR  = isMobile ? 8 : 22;
+    const NEAR = isMobile ? 6 : 18;
     const particles: Particle[] = [
       ...Array.from({ length: FAR  }, () => ({
         x: R(0, 1440), y: R(0, 900),

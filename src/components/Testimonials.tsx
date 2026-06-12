@@ -95,6 +95,7 @@ export default function Testimonials() {
                     alt={current.author}
                     referrerPolicy="no-referrer"
                     className="w-12 h-12 rounded-full object-cover border border-orange-500/30"
+                    loading="lazy"
                   />
                   <div>
                     <h4 className="font-sans font-bold text-white text-base leading-none">

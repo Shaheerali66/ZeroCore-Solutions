@@ -80,6 +80,7 @@ export default function Portfolio() {
                     src={project.imageUrl}
                     alt={project.title}
                     referrerPolicy="no-referrer"
+                    loading="lazy"
                     className="w-full h-full object-cover transition-transform duration-700 ease-out group-hover:scale-105 group-hover:opacity-40 opacity-50 grayscale hover:grayscale-0"
                   />
                   {/* Premium overlay gradients */}
