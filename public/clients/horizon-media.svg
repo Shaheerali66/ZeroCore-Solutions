@@ -1,0 +1,7 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 240 80" fill="none">
+  <circle cx="28" cy="34" r="14" stroke="white" stroke-width="1.5" fill="none" opacity="0.9"/>
+  <line x1="14" y1="50" x2="42" y2="50" stroke="white" stroke-width="1.5" opacity="0.6"/>
+  <path d="M20 34 Q28 22 36 34" stroke="white" stroke-width="1" fill="none" opacity="0.4"/>
+  <text x="56" y="36" font-family="Inter, Arial, sans-serif" font-weight="700" font-size="18" fill="white" opacity="0.95">HORIZON</text>
+  <text x="56" y="54" font-family="Inter, Arial, sans-serif" font-weight="300" font-size="12" fill="white" opacity="0.6" letter-spacing="3">MEDIA</text>
+</svg>

@@ -1,0 +1,6 @@
+{
+  "name": "ZeroCore Solutions",
+  "description": "High-end digital agency specializing in technology, marketing, branding, AI solutions, and business automation.",
+  "requestFramePermissions": [],
+  "majorCapabilities": ["MAJOR_CAPABILITY_SERVER_SIDE_GEMINI_API"]
+}

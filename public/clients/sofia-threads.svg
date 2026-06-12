@@ -1,0 +1,6 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 240 80" fill="none">
+  <path d="M18 30 Q28 20 38 30 Q28 40 18 30 Z" stroke="white" stroke-width="1.2" fill="none" opacity="0.8"/>
+  <path d="M18 40 Q28 30 38 40 Q28 50 18 40 Z" stroke="white" stroke-width="1.2" fill="none" opacity="0.6"/>
+  <text x="56" y="36" font-family="Inter, Arial, sans-serif" font-weight="700" font-size="18" fill="white" opacity="0.95">SOFIA</text>
+  <text x="56" y="54" font-family="Inter, Arial, sans-serif" font-weight="300" font-size="12" fill="white" opacity="0.6" letter-spacing="3">THREADS</text>
+</svg>
