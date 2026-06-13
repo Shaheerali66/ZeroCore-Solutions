@@ -25,7 +25,7 @@ export default function Footer() {
           <div className="flex items-center justify-center md:justify-start gap-2">
             <div className="w-8 h-8 rounded overflow-hidden">
               <img
-                src="public/Zero Core Logo ( Orange & white )111-01.png"
+                src="logo.png"
                 alt="ZeroCore Logo"
                 className="w-full h-full object-contain"
               />

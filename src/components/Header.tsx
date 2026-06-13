@@ -49,7 +49,7 @@ export default function Header() {
           >
             <div className="w-15 h-15 rounded-lg overflow-hidden transition-all duration-500 group-hover:rotate-12 group-hover:scale-105">
               <img
-                src="/Zero Core Logo ( Orange & white )111-01.png"
+                src="logo.png"
                 alt="ZeroCore Logo"
                 className="w-full h-full object-contain"
               />
