@@ -64,3 +64,31 @@ html {
   border-radius: 16px;
 }
 
+/* ── prefers-reduced-motion ────────────────────────────────────
+   Users who opt out of motion get a completely still UI.
+   All CSS animations & transitions are collapsed to near-zero.
+   JS-driven animations are gated separately at component level.
+   ────────────────────────────────────────────────────────────── */
+@media (prefers-reduced-motion: reduce) {
+  *,
+  *::before,
+  *::after {
+    animation-duration: 0.01ms !important;
+    animation-iteration-count: 1 !important;
+    transition-duration: 0.01ms !important;
+    scroll-behavior: auto !important;
+  }
+
+  /* Marquee — halt it completely */
+  .animate-marquee-clients {
+    animation-play-state: paused !important;
+  }
+
+  /* Tailwind's built-in pulse/bounce/spin utilities */
+  .animate-pulse,
+  .animate-bounce,
+  .animate-spin,
+  .animate-pulseGlow {
+    animation: none !important;
+  }
+}

@@ -1,9 +1,9 @@
-import React, { useState } from 'react';
+import React, { useState, memo } from 'react';
 import { motion, AnimatePresence } from 'motion/react';
 import { X, Calendar, User, Tag, ArrowUpRight, CheckCircle2 } from 'lucide-react';
 import { PORTFOLIO, PORTFOLIO_SECTION, Project } from '../data/content';
 
-export default function Portfolio() {
+function Portfolio() {
   const [activeCategory, setActiveCategory] = useState<string>('All');
   const [selectedProject, setSelectedProject] = useState<Project | null>(null);
 
@@ -152,6 +152,7 @@ export default function Portfolio() {
                     src={selectedProject.imageUrl}
                     alt={selectedProject.title}
                     referrerPolicy="no-referrer"
+                    loading="lazy"
                     className="w-full h-full object-cover opacity-30"
                   />
                   <div className="absolute inset-0 bg-gradient-to-t from-neutral-950 to-transparent"></div>
@@ -265,3 +266,5 @@ export default function Portfolio() {
     </section>
   );
 }
+
+export default memo(Portfolio);

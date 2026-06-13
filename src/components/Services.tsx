@@ -1,9 +1,11 @@
-import React from 'react';
+import React, { memo } from 'react';
 import { motion } from 'motion/react';
 import {
   Code2, ShoppingBag, TrendingUp,
   Layers, Palette, Camera, ArrowRight, CheckCircle2
 } from 'lucide-react';
+import { SERVICES_SECTION } from '../data/content';
+import { SERVICES } from '../data/services';
 import { Service, SectionContent } from '../types';
 
 // Safe Lucide mapping list
@@ -16,10 +18,7 @@ const iconMap: Record<string, React.ComponentType<any>> = {
   Camera
 };
 
-import { SERVICES_SECTION } from '../data/content';
-import { SERVICES } from '../data/services';
-
-export default function Services() {
+function Services() {
   return (
     <section
       id="services"
@@ -117,3 +116,5 @@ export default function Services() {
     </section>
   );
 }
+
+export default memo(Services);

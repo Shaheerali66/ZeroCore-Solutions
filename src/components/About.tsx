@@ -1,4 +1,4 @@
-import React, { useEffect, useState, useRef } from 'react';
+import React, { useEffect, useState, useRef, memo } from 'react';
 import { motion, useInView } from 'motion/react';
 import { Target, Lightbulb, TrendingUp, Cpu } from 'lucide-react';
 import { ABOUT } from '../data/content';
@@ -48,7 +48,7 @@ function StatCounter({ end, suffix = '', decimals = 0 }: StatCounterProps) {
   );
 }
 
-export default function About() {
+function About() {
   const pillars = [
     {
       icon: <Cpu className="w-5 h-5 text-orange-500" />,
@@ -141,3 +141,5 @@ export default function About() {
     </section>
   );
 }
+
+export default memo(About);

@@ -1,15 +1,15 @@
-import React, { useState } from 'react';
+import React, { useState, memo } from 'react';
 import { motion, AnimatePresence } from 'motion/react';
 import emailjs from '@emailjs/browser';
 import {
-  Send, PhoneCall, Mail, MessageSquare,
-  Check, AlertTriangle, Twitter, Linkedin, Github, Instagram
+  Send, PhoneCall, Mail,
+  Check, AlertTriangle, Linkedin, Github, Instagram
 } from 'lucide-react';
 import { SERVICES } from '../data/services';
 import { CONTACT } from '../data/content';
 import { EMAILJS_CONFIG } from '../data/emailjs';
 
-export default function Contact() {
+function Contact() {
   const [name, setName] = useState('');
   const [email, setEmail] = useState('');
   const [selectedService, setSelectedService] = useState('');
@@ -321,3 +321,5 @@ export default function Contact() {
     </section>
   );
 }
+
+export default memo(Contact);

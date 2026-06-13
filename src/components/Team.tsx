@@ -1,10 +1,10 @@
-import React from 'react';
+import React, { memo } from 'react';
 import { motion } from 'motion/react';
 import { Twitter, Linkedin, Github, Mail, ShieldCheck } from 'lucide-react';
 import { TEAM_SECTION } from '../data/content';
 import { TEAM } from '../data/team';
 
-export default function Team() {
+function Team() {
   return (
     <section
       id="team"
@@ -21,7 +21,7 @@ export default function Team() {
         {/* Section Heading Editorial Block */}
         <div className="text-center md:text-left max-w-2xl mb-20">
           <span className="font-mono text-xs uppercase tracking-[0.25em] text-orange-500 font-bold block mb-3">ELITE ENGINEER COLLECTIVE</span>
-          <h2 className="font-sans font-black text-3xl sm:text-5xl text-white tracking-tight leading-none animate-pulse" style={{ animationDuration: '6s' }}>
+          <h2 className="font-sans font-black text-3xl sm:text-5xl text-white tracking-tight leading-none">
             {TEAM_SECTION.title}
           </h2>
           <p className="mt-4 text-xs sm:text-sm text-neutral-400 font-sans leading-relaxed">
@@ -129,3 +129,5 @@ export default function Team() {
     </section>
   );
 }
+
+export default memo(Team);

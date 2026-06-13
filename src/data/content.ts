@@ -85,7 +85,7 @@ export const TESTIMONIALS: Testimonial[] = [
     company: 'Chai Pe Charcha',
     text: 'We are very pleased to have worked with your team, which is why we have revised the agreement. Your team has been highly cooperative throughout the process. To date, we have not revised agreements with any other company in this way. Your team consistently delivers work on time, and we truly appreciate your professionalism. We are confident that we will continue working together in the future, InshaAllah.',
     rating: 5,
-    imageUrl: '/CPC logo1.png',
+    imageUrl: '/cpc-logo1.webp',
   },
   {
     id: 'ts2',
@@ -94,7 +94,7 @@ export const TESTIMONIALS: Testimonial[] = [
     company: 'Shine and Shine',
     text: 'The design is absolutely outstanding! Both the creativity and attention to detail are perfect. It is completely in line with our brand identity. Great work!',
     rating: 5,
-    imageUrl: '/images.jpg',
+    imageUrl: '/images.webp',
   },
   {
     id: 'ts3',
@@ -103,7 +103,7 @@ export const TESTIMONIALS: Testimonial[] = [
     company: 'Paratha 09',
     text: 'You have created a very good design and the typography is excellent. We are very pleased with your work.',
     rating: 5,
-    imageUrl: '/logo 09.jpg',
+    imageUrl: '/logo-09.webp',
   },
   {
     id: 'ts4',
@@ -112,7 +112,7 @@ export const TESTIMONIALS: Testimonial[] = [
     company: 'It Burger Time',
     text: 'Very good, totally clear, and completely satisfied with your work. The collaboration will continue, InshAllah.',
     rating: 5,
-    imageUrl: '/IBT-LOGO-02.png',
+    imageUrl: '/ibt-logo.webp',
   },
 ];
 

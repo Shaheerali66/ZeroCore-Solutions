@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { useState, memo } from 'react';
 import { motion, AnimatePresence } from 'motion/react';
 import { 
   X, Check, RotateCcw, Save, Plus, Trash2, Edit 
@@ -471,6 +471,7 @@ export default function AdminPanel({
                             src={member.imageUrl}
                             alt={member.name}
                             referrerPolicy="no-referrer"
+                            loading="lazy"
                             className="w-10 h-10 rounded-full object-cover border border-orange-500/30 bg-neutral-950"
                           />
                           <div>
@@ -649,3 +650,5 @@ export default function AdminPanel({
     </>
   );
 }
+
+export default memo(AdminPanel);

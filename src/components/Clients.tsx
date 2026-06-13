@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { memo } from 'react';
 import { CLIENTS, CLIENTS_SECTION } from '../data/clients';
 
 /**
@@ -9,8 +9,13 @@ import { CLIENTS, CLIENTS_SECTION } from '../data/clients';
  * - Pause-on-hover (entire marquee)
  * - GPU-accelerated CSS animation via translate3d
  * - Logos tripled for seamless infinite loop
+ * - Respects prefers-reduced-motion (pauses animation)
  */
-export default function Clients() {
+const prefersReduced =
+  typeof window !== 'undefined' &&
+  window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+
+function Clients() {
   // Triple the list for seamless infinite loop
   const tripled = [...CLIENTS, ...CLIENTS, ...CLIENTS];
 
@@ -45,7 +50,10 @@ export default function Clients() {
 
         {/* Single scrolling row */}
         <div className="flex items-center" style={{ width: 'max-content' }}>
-          <div className="flex items-center gap-8 sm:gap-10 animate-marquee-clients">
+          <div
+            className="flex items-center gap-8 sm:gap-10 animate-marquee-clients"
+            style={prefersReduced ? { animationPlayState: 'paused' } : undefined}
+          >
             {tripled.map((client, i) => (
               <a
                 key={`cl-${client.id}-${i}`}
@@ -85,3 +93,5 @@ export default function Clients() {
     </section>
   );
 }
+
+export default memo(Clients);

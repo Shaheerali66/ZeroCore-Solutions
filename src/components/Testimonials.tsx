@@ -1,9 +1,9 @@
-import React, { useState, useEffect, useRef } from 'react';
+import React, { useState, useEffect, useRef, memo } from 'react';
 import { motion, AnimatePresence } from 'motion/react';
 import { ChevronLeft, ChevronRight, MessageSquareQuote, Star } from 'lucide-react';
 import { TESTIMONIALS, TESTIMONIALS_SECTION } from '../data/content';
 
-export default function Testimonials() {
+function Testimonials() {
   const [currentIndex, setCurrentIndex] = useState(0);
   const autoplayRef = useRef<NodeJS.Timeout | null>(null);
 
@@ -153,3 +153,5 @@ export default function Testimonials() {
     </section>
   );
 }
+
+export default memo(Testimonials);

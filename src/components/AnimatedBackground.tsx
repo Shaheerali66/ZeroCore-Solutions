@@ -12,9 +12,13 @@
  * Runs at 60 fps; background is intentionally drawn at 30 fps
  * by skipping every other frame to preserve compositor budget
  * for page scroll and UI interactions.
+ *
+ * Performance:
+ *  - prefers-reduced-motion: renders a static CSS gradient instead (zero rAF budget)
+ *  - React.memo: prevents re-renders from parent state changes
  */
 
-import React, { useEffect, useRef } from 'react';
+import React, { useEffect, useRef, memo } from 'react';
 
 // ── Types ─────────────────────────────────────────────────────────────────────
 interface Particle {
@@ -43,8 +47,31 @@ interface Wave {
 // ── Seeded random helper ───────────────────────────────────────────────────────
 const R = (min: number, max: number) => Math.random() * (max - min) + min;
 
+// ── Static fallback for prefers-reduced-motion ────────────────────────────────
+// Zero JS animation cost — a simple CSS gradient that matches the brand palette.
+function StaticBackground() {
+  return (
+    <div
+      aria-hidden="true"
+      style={{
+        position: 'fixed',
+        top: 0, left: 0,
+        width: '100%',
+        height: '100%',
+        pointerEvents: 'none',
+        zIndex: 0,
+        background: `
+          radial-gradient(ellipse 80% 60% at 15% 22%, rgba(255,75,0,0.13) 0%, transparent 70%),
+          radial-gradient(ellipse 70% 55% at 85% 55%, rgba(255,115,0,0.10) 0%, transparent 70%),
+          radial-gradient(ellipse 60% 50% at 50% 88%, rgba(210,50,0,0.07) 0%, transparent 70%)
+        `,
+      }}
+    />
+  );
+}
+
 // ─────────────────────────────────────────────────────────────────────────────
-export default function AnimatedBackground() {
+function AnimatedBackgroundCanvas() {
   const canvasRef = useRef<HTMLCanvasElement>(null);
 
   useEffect(() => {
@@ -68,7 +95,6 @@ export default function AnimatedBackground() {
     const isMobile = typeof window !== 'undefined' && window.innerWidth < 768;
 
     // ── 1. Ambient deep-space orbs ────────────────────────────────────────
-    // Large, very soft blobs that drift slowly — the core of the "shader mesh" feel
     const orbs: Orb[] = isMobile ? [
       { bx:0.15, by:0.22, r:0.62, col:'255,75,0',   sp:0.00014, ph:0.00, ax:0.09, ay:0.07 },
       { bx:0.85, by:0.55, r:0.68, col:'255,115,0',  sp:0.00020, ph:2.09, ax:0.07, ay:0.08 },
@@ -81,7 +107,6 @@ export default function AnimatedBackground() {
     ];
 
     // ── 2. Fluid light wave bands ─────────────────────────────────────────
-    // Horizontal soft-edged bands that oscillate up/down
     const waves: Wave[] = isMobile ? [
       { by:0.28, amp:0.06, spd:0.00022, ph:0.00, col:'255,80,0',  op:0.045, w:0.18 },
     ] : [
@@ -91,8 +116,6 @@ export default function AnimatedBackground() {
     ];
 
     // ── 3. Dual-layer particles ───────────────────────────────────────────
-    // Far layer: 22 tiny particles — slow, very low alpha — adds depth
-    // Near layer: 18 medium particles — slightly faster, more visible
     const FAR  = isMobile ? 8 : 22;
     const NEAR = isMobile ? 6 : 18;
     const particles: Particle[] = [
@@ -113,7 +136,7 @@ export default function AnimatedBackground() {
     ];
 
     let t = 0;
-    let frame = 0; // frame counter for throttling
+    let frame = 0;
 
     const drawOrb = (cx: number, cy: number, r: number, col: string, op0: number) => {
       const g = ctx.createRadialGradient(cx, cy, 0, cx, cy, r);
@@ -160,7 +183,6 @@ export default function AnimatedBackground() {
       frame++;
 
       // Background canvas renders at ~30 fps by skipping odd frames.
-      // The compositor (scroll, hover, etc.) stays at 60 fps.
       if (frame % 2 !== 0) return;
 
       t++;
@@ -207,7 +229,7 @@ export default function AnimatedBackground() {
         drawParticle(p);
       }
 
-      // ── Vignette — keeps viewer eye toward centre content ──────────────
+      // ── Vignette ──────────────────────────────────────────────────────
       const vig = ctx.createRadialGradient(W/2, H/2, H * 0.28, W/2, H/2, H * 0.85);
       vig.addColorStop(0, 'rgba(0,0,0,0)');
       vig.addColorStop(1, 'rgba(0,0,0,0.55)');
@@ -226,18 +248,35 @@ export default function AnimatedBackground() {
   return (
     <canvas
       ref={canvasRef}
+      aria-hidden="true"
       style={{
         position: 'fixed',
         top: 0, left: 0,
         width: '100%',
         height: '100%',
         pointerEvents: 'none',
-        zIndex: 0,           // Sits behind content, above root black wrapper
+        zIndex: 0,
         display: 'block',
-        // GPU compositing layer — prevents jank during scroll
         transform: 'translateZ(0)',
         willChange: 'transform',
       }}
     />
   );
+}
+
+// ── Export — prefers-reduced-motion gate ──────────────────────────────────────
+// Users who opt out of motion get a zero-cost static gradient.
+// All other users get the full canvas animation, memoized.
+const AnimatedBackgroundCanvasMemo = memo(AnimatedBackgroundCanvas);
+
+export default function AnimatedBackground() {
+  const prefersReduced =
+    typeof window !== 'undefined' &&
+    window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+
+  if (prefersReduced) {
+    return <StaticBackground />;
+  }
+
+  return <AnimatedBackgroundCanvasMemo />;
 }
