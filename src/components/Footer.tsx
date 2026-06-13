@@ -23,8 +23,12 @@ export default function Footer() {
         {/* Brand details */}
         <div>
           <div className="flex items-center justify-center md:justify-start gap-2">
-            <div className="w-8 h-8 rounded bg-orange-600 flex items-center justify-center font-bold text-white shadow-xl">
-              <span className="font-sans font-black text-base">Z</span>
+            <div className="w-8 h-8 rounded overflow-hidden">
+              <img
+                src="public/Zero Core Logo ( Orange & white )111-01.png"
+                alt="ZeroCore Logo"
+                className="w-full h-full object-contain"
+              />
             </div>
             <div className="flex items-center">
               <span className="font-sans font-black text-white text-sm tracking-widest uppercase">ZEROCORE</span>
