@@ -21,7 +21,7 @@ export const ABOUT = {
   description: 'ZeroCore Solutions is a full-service digital agency helping businesses build a powerful online presence. From professional websites and e-commerce stores to digital marketing, branding, graphic design, and AI-powered solutions, we create strategies and experiences that drive growth, engagement, and long-term success.',
   stats: [
     { label: 'PROJECTS COMPLETED', value: 10, suffix: '+', subtext: 'Successfully delivered across multiple industries.' },
-    { label: 'HAPPY CLIENTS', value: 4, suffix: '+', subtext: 'Building long-term partnerships through quality service.' },
+    { label: 'HAPPY CLIENTS', value: 6, suffix: '+', subtext: 'Building long-term partnerships through quality service.' },
     { label: 'YEARS TENURE', value: 2, suffix: '+', subtext: 'Helping businesses grow in the digital world.' },
     { label: 'SUCCESS RATE', value: 99.4, suffix: '%', subtext: 'Focused on delivering results and exceeding expectations.', decimals: 1 },
   ],
