@@ -27,37 +27,41 @@ export const CLIENTS: Client[] = [
     id: 'cl1',
     name: 'Her Turn',
     logo: '/HER TURN logo bg.png',
-    website: '',
   },
   {
     id: 'cl2',
     name: 'Chai Pe Charcha',
     logo: '/CPC logo.png',
-    website: 'https://vortex-apparel.com',
   },
   {
     id: 'cl3',
     name: 'Paratha 09',
     logo: '/09 logo without back.png',
-    website: 'https://zenith-capital.com',
   },
   {
     id: 'cl4',
     name: 'It Burger Time',
     logo: '/IBT-LOGO-02.png',
-    website: 'https://aether-publishing.com',
   },
   {
     id: 'cl5',
     name: 'BON BON Cafe',
     logo: '/BONBON Cafe.png',
-    website: 'https://sofia-threads.com',
   },
   {
     id: 'cl5',
     name: 'Shine and Shine',
     logo: '/shine shine.png',
-    website: 'https://sofia-threads.com',
+  },
+  {
+    id: 'cl6',
+    name: 'Dukaan Online',
+    logo: '/logo_black__2_-removebg.png',
+  },
+  {
+    id: 'cl7',
+    name: 'YIC',
+    logo: '/YIC logo.png',
   },
 ];
 
