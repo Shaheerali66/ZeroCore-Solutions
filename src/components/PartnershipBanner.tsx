@@ -119,7 +119,7 @@ function PartnershipBanner() {
               <h2 className="font-sans font-black text-3xl sm:text-4xl xl:text-5xl text-white tracking-tight leading-none">
                 ZeroCore Solutions
                 <span className="text-orange-500"> × </span>
-                <span className="text-white">Youth Innovation Challangr</span>
+                <span className="text-white whitespace-nowrap">Youth Innovation Challange</span>
               </h2>
 
               {/* Subheading accent line */}
