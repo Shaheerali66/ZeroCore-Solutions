@@ -61,10 +61,8 @@ export const TEAM: TeamMember[] = [
     name: 'Saif Bhatti',
     designation: 'Lead Photo & Video Editor',
     description: 'Analytical marketer engineering high-converting customer loops, ad spends, and semantic content pipelines.',
-    imageUrl: 'https://picsum.photos/seed/elenar/400/400',
+    imageUrl: '/13.png',
     socials: {
-      linkedin: 'https://linkedin.com/in/elenarostova',
-      email: 'elena@zerocore.solutions',
     },
   },
 ];
