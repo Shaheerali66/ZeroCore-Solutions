@@ -7,8 +7,9 @@ import Hero from '../components/Hero';
 // user scrolls, keeping the initial JS parse budget minimal.
 const About       = lazy(() => import('../components/About'));
 const Services    = lazy(() => import('../components/Services'));
-const Clients     = lazy(() => import('../components/Clients'));
-const Pricing     = lazy(() => import('../components/Pricing'));
+const Clients            = lazy(() => import('../components/Clients'));
+const PartnershipBanner  = lazy(() => import('../components/PartnershipBanner'));
+const Pricing            = lazy(() => import('../components/Pricing'));
 const Team        = lazy(() => import('../components/Team'));
 const Testimonials = lazy(() => import('../components/Testimonials'));
 const Contact     = lazy(() => import('../components/Contact'));
@@ -44,6 +45,9 @@ export default function Home() {
       </Suspense>
       <Suspense fallback={<SectionLoader />}>
         <Clients />
+      </Suspense>
+      <Suspense fallback={<SectionLoader />}>
+        <PartnershipBanner />
       </Suspense>
       <Suspense fallback={<SectionLoader />}>
         <Pricing />
