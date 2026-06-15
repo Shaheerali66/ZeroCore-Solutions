@@ -165,130 +165,130 @@ function PartnershipBanner() {
                 <ExternalLink className="w-3 h-3 opacity-70" />
               </a>
             </div>
-      </motion.div>
+          </motion.div>
 
-      {/* ── RIGHT: Logo card ─────────────────────────────────────────────── */}
-      <motion.div
-        className="lg:col-span-6 xl:col-span-5 flex justify-center lg:justify-end"
-        initial={{ opacity: 0, x: 40 }}
-        whileInView={{ opacity: 1, x: 0 }}
-        viewport={{ once: true, margin: '-60px' }}
-        transition={{ duration: 0.7, ease: 'easeOut', delay: 0.12 }}
-      >
-        <div className="relative w-full max-w-sm">
-
-          {/* Outer glow halo */}
-          <div
-            aria-hidden="true"
-            className="absolute inset-[-2px] rounded-2xl pointer-events-none"
-            style={{
-              background: 'linear-gradient(135deg, rgba(255,100,0,0.5) 0%, rgba(255,60,0,0.15) 50%, rgba(255,130,0,0.35) 100%)',
-              borderRadius: '18px',
-              filter: 'blur(1px)',
-            }}
-          />
-
-          {/* Main card */}
-          <div
-            className="relative rounded-2xl bg-neutral-900 border border-orange-500/60 overflow-hidden"
-            style={{
-              animation: 'partnerCardFloat 5s ease-in-out infinite, partnerBorderGlow 4s ease-in-out infinite',
-            }}
+          {/* ── RIGHT: Logo card ─────────────────────────────────────────────── */}
+          <motion.div
+            className="lg:col-span-6 xl:col-span-5 flex justify-center lg:justify-end"
+            initial={{ opacity: 0, x: 40 }}
+            whileInView={{ opacity: 1, x: 0 }}
+            viewport={{ once: true, margin: '-60px' }}
+            transition={{ duration: 0.7, ease: 'easeOut', delay: 0.12 }}
           >
+            <div className="relative w-full max-w-sm">
 
-            {/* Animated scan-line effect */}
-            <div
-              aria-hidden="true"
-              style={{
-                position: 'absolute',
-                left: 0, right: 0,
-                height: '2px',
-                background: 'linear-gradient(90deg, transparent, rgba(255,100,0,0.6), transparent)',
-                animation: 'partnerScanLine 4s linear infinite',
-                zIndex: 10,
-                pointerEvents: 'none',
-              }}
-            />
+              {/* Outer glow halo */}
+              <div
+                aria-hidden="true"
+                className="absolute inset-[-2px] rounded-2xl pointer-events-none"
+                style={{
+                  background: 'linear-gradient(135deg, rgba(255,100,0,0.5) 0%, rgba(255,60,0,0.15) 50%, rgba(255,130,0,0.35) 100%)',
+                  borderRadius: '18px',
+                  filter: 'blur(1px)',
+                }}
+              />
 
-            {/* Top accent bar */}
-            <div className="h-1 w-full bg-gradient-to-r from-orange-600 via-amber-500 to-orange-600" />
+              {/* Main card */}
+              <div
+                className="relative rounded-2xl bg-neutral-900 border border-orange-500/60 overflow-hidden"
+                style={{
+                  animation: 'partnerCardFloat 5s ease-in-out infinite, partnerBorderGlow 4s ease-in-out infinite',
+                }}
+              >
 
-            {/* Inner background pattern */}
-            <div
-              className="absolute inset-0 pointer-events-none"
-              style={{
-                background: `
+                {/* Animated scan-line effect */}
+                <div
+                  aria-hidden="true"
+                  style={{
+                    position: 'absolute',
+                    left: 0, right: 0,
+                    height: '2px',
+                    background: 'linear-gradient(90deg, transparent, rgba(255,100,0,0.6), transparent)',
+                    animation: 'partnerScanLine 4s linear infinite',
+                    zIndex: 10,
+                    pointerEvents: 'none',
+                  }}
+                />
+
+                {/* Top accent bar */}
+                <div className="h-1 w-full bg-gradient-to-r from-orange-600 via-amber-500 to-orange-600" />
+
+                {/* Inner background pattern */}
+                <div
+                  className="absolute inset-0 pointer-events-none"
+                  style={{
+                    background: `
                       radial-gradient(ellipse 80% 60% at 50% 30%, rgba(255,80,0,0.06) 0%, transparent 70%),
                       radial-gradient(ellipse 60% 40% at 80% 80%, rgba(255,100,0,0.04) 0%, transparent 65%)
                     `,
-              }}
-            />
-
-            {/* Card inner content */}
-            <div className="relative z-5 p-8 sm:p-10 flex flex-col items-center gap-6">
-
-              {/* VERIFIED PARTNER badge */}
-              <div className="flex items-center gap-2 bg-neutral-950/80 border border-orange-500/40 rounded-full px-4 py-2">
-                <ShieldCheck className="w-4 h-4 text-orange-400" />
-                <span className="font-mono text-[10px] uppercase tracking-[0.2em] text-orange-400 font-black">
-                  Verified Partner
-                </span>
-              </div>
-
-              {/* Logo image */}
-              <div className="w-full flex items-center justify-center py-4">
-                <img
-                  src="/yic-logo.png"
-                  alt="Youth Innovation Challenge Logo"
-                  className="w-full max-w-[220px] h-auto object-contain select-none"
-                  draggable={false}
-                  loading="lazy"
-                  onError={(e) => {
-                    // Graceful fallback if logo doesn't exist yet
-                    const target = e.currentTarget;
-                    target.style.display = 'none';
-                    const fallback = target.nextElementSibling as HTMLElement | null;
-                    if (fallback) fallback.style.display = 'flex';
                   }}
                 />
-                {/* Text fallback shown only if image fails */}
-                <div
-                  style={{ display: 'none' }}
-                  className="flex-col items-center justify-center gap-2"
-                >
-                  <span className="font-mono font-black text-4xl text-orange-500">YIC</span>
-                  <span className="font-sans text-xs text-neutral-400 text-center">Youth Innovation Challenge</span>
+
+                {/* Card inner content */}
+                <div className="relative z-5 p-8 sm:p-10 flex flex-col items-center gap-6">
+
+                  {/* VERIFIED PARTNER badge */}
+                  <div className="flex items-center gap-2 bg-neutral-950/80 border border-orange-500/40 rounded-full px-4 py-2">
+                    <ShieldCheck className="w-4 h-4 text-orange-400" />
+                    <span className="font-mono text-[10px] uppercase tracking-[0.2em] text-orange-400 font-black">
+                      Verified Partner
+                    </span>
+                  </div>
+
+                  {/* Logo image */}
+                  <div className="w-full flex items-center justify-center py-4">
+                    <img
+                      src="/YIC logo.png"
+                      alt="Youth Innovation Challenge Logo"
+                      className="w-full max-w-[220px] h-auto object-contain select-none"
+                      draggable={false}
+                      loading="lazy"
+                      onError={(e) => {
+                        // Graceful fallback if logo doesn't exist yet
+                        const target = e.currentTarget;
+                        target.style.display = 'none';
+                        const fallback = target.nextElementSibling as HTMLElement | null;
+                        if (fallback) fallback.style.display = 'flex';
+                      }}
+                    />
+                    {/* Text fallback shown only if image fails */}
+                    <div
+                      style={{ display: 'none' }}
+                      className="flex-col items-center justify-center gap-2"
+                    >
+                      <span className="font-mono font-black text-4xl text-orange-500">YIC</span>
+                      <span className="font-sans text-xs text-neutral-400 text-center">Youth Innovation Challenge</span>
+                    </div>
+                  </div>
+
+                  {/* Partnership label */}
+                  <div className="w-full border-t border-neutral-800 pt-4 flex items-center justify-between">
+                    <div>
+                      <span className="font-mono text-[9px] uppercase tracking-[0.2em] text-neutral-500 block">Creative Partner</span>
+                      <span className="font-sans font-bold text-sm text-white">ZeroCore Solutions</span>
+                    </div>
+                    <div className="text-right">
+                      <span className="font-mono text-[9px] uppercase tracking-[0.2em] text-neutral-500 block">Status</span>
+                      <span className="flex items-center gap-1.5 justify-end">
+                        <span className="w-1.5 h-1.5 rounded-full bg-green-400 animate-pulse" />
+                        <span className="font-mono text-xs text-green-400 font-bold">Official</span>
+                      </span>
+                    </div>
+                  </div>
+
                 </div>
               </div>
 
-              {/* Partnership label */}
-              <div className="w-full border-t border-neutral-800 pt-4 flex items-center justify-between">
-                <div>
-                  <span className="font-mono text-[9px] uppercase tracking-[0.2em] text-neutral-500 block">Partner</span>
-                  <span className="font-sans font-bold text-sm text-white">ZeroCore Solutions</span>
-                </div>
-                <div className="text-right">
-                  <span className="font-mono text-[9px] uppercase tracking-[0.2em] text-neutral-500 block">Status</span>
-                  <span className="flex items-center gap-1.5 justify-end">
-                    <span className="w-1.5 h-1.5 rounded-full bg-green-400 animate-pulse" />
-                    <span className="font-mono text-xs text-green-400 font-bold">Official</span>
-                  </span>
-                </div>
-              </div>
+              {/* Corner accent dots */}
+              <div className="absolute -top-1 -left-1 w-2 h-2 rounded-full bg-orange-500 shadow-[0_0_8px_rgba(255,106,0,0.8)]" />
+              <div className="absolute -top-1 -right-1 w-2 h-2 rounded-full bg-orange-500 shadow-[0_0_8px_rgba(255,106,0,0.8)]" />
+              <div className="absolute -bottom-1 -left-1 w-2 h-2 rounded-full bg-orange-500/50 shadow-[0_0_6px_rgba(255,106,0,0.5)]" />
+              <div className="absolute -bottom-1 -right-1 w-2 h-2 rounded-full bg-orange-500/50 shadow-[0_0_6px_rgba(255,106,0,0.5)]" />
 
             </div>
-          </div>
-
-          {/* Corner accent dots */}
-          <div className="absolute -top-1 -left-1 w-2 h-2 rounded-full bg-orange-500 shadow-[0_0_8px_rgba(255,106,0,0.8)]" />
-          <div className="absolute -top-1 -right-1 w-2 h-2 rounded-full bg-orange-500 shadow-[0_0_8px_rgba(255,106,0,0.8)]" />
-          <div className="absolute -bottom-1 -left-1 w-2 h-2 rounded-full bg-orange-500/50 shadow-[0_0_6px_rgba(255,106,0,0.5)]" />
-          <div className="absolute -bottom-1 -right-1 w-2 h-2 rounded-full bg-orange-500/50 shadow-[0_0_6px_rgba(255,106,0,0.5)]" />
+          </motion.div>
 
         </div>
-      </motion.div>
-
-    </div>
       </div >
     </section >
   );
