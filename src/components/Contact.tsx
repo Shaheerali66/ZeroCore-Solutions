@@ -13,6 +13,7 @@ function Contact() {
   const [name, setName] = useState('');
   const [email, setEmail] = useState('');
   const [selectedService, setSelectedService] = useState('');
+  const [selectedPricingPlan, setSelectedPricingPlan] = useState('');
   const [message, setMessage] = useState('');
   const [status, setStatus] = useState<'idle' | 'sending' | 'success' | 'error'>('idle');
   const [errorMsg, setErrorMsg] = useState('');
@@ -32,6 +33,7 @@ function Contact() {
           name: name,
           email: email,
           service_type: selectedService || 'Not specified',
+          pricing_plan: selectedPricingPlan || 'Not specified',
           message: message,
         },
         EMAILJS_CONFIG.PUBLIC_KEY,
@@ -41,6 +43,7 @@ function Contact() {
       setName('');
       setEmail('');
       setSelectedService('');
+      setSelectedPricingPlan('');
       setMessage('');
 
       // Auto dismiss success after 5s
@@ -216,6 +219,22 @@ function Contact() {
                     {SERVICES.map(s => (
                       <option key={s.id} value={s.title} className="bg-neutral-950 text-white">{s.title}</option>
                     ))}
+                  </select>
+                </div>
+
+                {/* Pricing Plan Dropdown */}
+                <div className="space-y-1.5">
+                  <label className="text-neutral-400 font-mono tracking-wider font-semibold text-[10px]">PRICING PLAN</label>
+                  <select
+                    value={selectedPricingPlan}
+                    onChange={(e) => setSelectedPricingPlan(e.target.value)}
+                    className="w-full bg-neutral-950 border border-neutral-800 rounded-lg px-4 py-3 text-white focus:outline-none focus:border-orange-500 transition-all font-sans cursor-pointer"
+                  >
+                    <option value="" className="bg-neutral-955">-- Select Pricing Plan (Optional) --</option>
+                    <option value="Starter — PKR 25,000/month" className="bg-neutral-950 text-white">Starter — PKR 25,000/month</option>
+                    <option value="Growth — PKR 40,000/month" className="bg-neutral-950 text-white">Growth — PKR 40,000/month</option>
+                    <option value="Pro — PKR 65,000/month" className="bg-neutral-950 text-white">Pro — PKR 65,000/month</option>
+                    <option value="Elite — PKR 95,000/month" className="bg-neutral-950 text-white">Elite — PKR 95,000/month</option>
                   </select>
                 </div>
 
