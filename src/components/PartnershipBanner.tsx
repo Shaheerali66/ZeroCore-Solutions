@@ -106,7 +106,7 @@ function PartnershipBanner() {
                 style={{ animation: 'partnerBadgePulse 3s ease-in-out infinite' }}
               >
                 <BadgeCheck className="w-3.5 h-3.5" />
-                Official Partnership
+                Official Creative Partnership
               </span>
               <span className="flex items-center gap-1 font-mono text-[9px] text-neutral-600 uppercase tracking-widest">
                 <span className="w-1 h-1 rounded-full bg-green-500 animate-pulse" />
@@ -119,9 +119,7 @@ function PartnershipBanner() {
               <h2 className="font-sans font-black text-3xl sm:text-4xl xl:text-5xl text-white tracking-tight leading-none">
                 ZeroCore Solutions
                 <span className="text-orange-500"> × </span>
-                <span className="text-white">Youth Innovation</span>
-                <br />
-                <span className="text-neutral-300">Challenge</span>
+                <span className="text-white">Youth Innovation Challangr</span>
               </h2>
 
               {/* Subheading accent line */}
@@ -136,7 +134,7 @@ function PartnershipBanner() {
             {/* Description */}
             <p className="text-sm sm:text-base text-neutral-400 font-sans leading-relaxed max-w-lg">
               We are proud to announce our official partnership with{' '}
-              <span className="text-white font-semibold">Youth Innovation Challenge</span>{' '}
+              <span className="text-white font-semibold whitespace-nowrap">Youth Innovation Challenge</span>{' '}
               — empowering the next generation of innovators with world-class creative and digital solutions.
             </p>
 
