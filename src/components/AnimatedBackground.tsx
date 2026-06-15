@@ -15,10 +15,11 @@
  *
  * Performance:
  *  - prefers-reduced-motion: renders a static CSS gradient instead (zero rAF budget)
+ *  - Mobile (≤768 px): renders a static CSS gradient — zero canvas, zero rAF
  *  - React.memo: prevents re-renders from parent state changes
  */
 
-import React, { useEffect, useRef, memo } from 'react';
+import React, { useEffect, useRef, memo, useState } from 'react';
 
 // ── Types ─────────────────────────────────────────────────────────────────────
 interface Particle {
@@ -70,6 +71,43 @@ function StaticBackground() {
   );
 }
 
+// ── Mobile static background — pure CSS, zero JS, zero animation ──────────────
+// A "frozen" snapshot of what the animated canvas looks like mid-playback.
+// Mimics: 2 large orange orbs, a subtle warm wave band, edge vignette.
+function MobileStaticBackground() {
+  return (
+    <div
+      aria-hidden="true"
+      style={{
+        position: 'fixed',
+        top: 0, left: 0,
+        width: '100%',
+        height: '100%',
+        pointerEvents: 'none',
+        zIndex: 0,
+        // Layer 1 — near-black warm base
+        backgroundColor: '#0a0704',
+        background: [
+          // Orb 1 — top-left warm amber (mirrors animated orb at bx:0.15, by:0.22)
+          'radial-gradient(ellipse 75% 55% at 14% 22%, rgba(255,75,0,0.14) 0%, rgba(255,60,0,0.05) 45%, transparent 70%)',
+          // Orb 2 — right-center deep orange (mirrors bx:0.85, by:0.55)
+          'radial-gradient(ellipse 65% 52% at 87% 54%, rgba(255,115,0,0.11) 0%, rgba(255,90,0,0.04) 45%, transparent 70%)',
+          // Orb 3 — bottom-center ember (mirrors bx:0.50, by:0.88)
+          'radial-gradient(ellipse 55% 45% at 50% 90%, rgba(210,50,0,0.09) 0%, transparent 65%)',
+          // Orb 4 — far-left mid (mirrors bx:0.05, by:0.65)
+          'radial-gradient(ellipse 40% 38% at 4% 65%, rgba(255,45,0,0.07) 0%, transparent 60%)',
+          // Wave band — horizontal warm sweep at ~28% height
+          'linear-gradient(to bottom, transparent 20%, rgba(255,80,0,0.035) 28%, rgba(255,80,0,0.045) 32%, transparent 42%)',
+          // Vignette — dark edges like the canvas radial vignette
+          'radial-gradient(ellipse 100% 100% at 50% 50%, transparent 35%, rgba(0,0,0,0.45) 75%, rgba(0,0,0,0.72) 100%)',
+          // Near-black warm base
+          'linear-gradient(135deg, #0d0603 0%, #090503 50%, #0b0604 100%)',
+        ].join(', '),
+      }}
+    />
+  );
+}
+
 // ─────────────────────────────────────────────────────────────────────────────
 function AnimatedBackgroundCanvas() {
   const canvasRef = useRef<HTMLCanvasElement>(null);
@@ -92,13 +130,8 @@ function AnimatedBackgroundCanvas() {
     resize();
     window.addEventListener('resize', resize, { passive: true });
 
-    const isMobile = typeof window !== 'undefined' && window.innerWidth < 768;
-
     // ── 1. Ambient deep-space orbs ────────────────────────────────────────
-    const orbs: Orb[] = isMobile ? [
-      { bx:0.15, by:0.22, r:0.62, col:'255,75,0',   sp:0.00014, ph:0.00, ax:0.09, ay:0.07 },
-      { bx:0.85, by:0.55, r:0.68, col:'255,115,0',  sp:0.00020, ph:2.09, ax:0.07, ay:0.08 },
-    ] : [
+    const orbs: Orb[] = [
       { bx:0.15, by:0.22, r:0.62, col:'255,75,0',   sp:0.00014, ph:0.00, ax:0.09, ay:0.07 },
       { bx:0.85, by:0.55, r:0.68, col:'255,115,0',  sp:0.00020, ph:2.09, ax:0.07, ay:0.08 },
       { bx:0.50, by:0.88, r:0.50, col:'210,50,0',   sp:0.00017, ph:4.19, ax:0.06, ay:0.06 },
@@ -107,17 +140,15 @@ function AnimatedBackgroundCanvas() {
     ];
 
     // ── 2. Fluid light wave bands ─────────────────────────────────────────
-    const waves: Wave[] = isMobile ? [
-      { by:0.28, amp:0.06, spd:0.00022, ph:0.00, col:'255,80,0',  op:0.045, w:0.18 },
-    ] : [
+    const waves: Wave[] = [
       { by:0.28, amp:0.06, spd:0.00022, ph:0.00, col:'255,80,0',  op:0.045, w:0.18 },
       { by:0.55, amp:0.04, spd:0.00030, ph:1.57, col:'255,110,0', op:0.035, w:0.14 },
       { by:0.78, amp:0.08, spd:0.00018, ph:3.14, col:'200,55,0',  op:0.030, w:0.22 },
     ];
 
     // ── 3. Dual-layer particles ───────────────────────────────────────────
-    const FAR  = isMobile ? 8 : 22;
-    const NEAR = isMobile ? 6 : 18;
+    const FAR  = 22;
+    const NEAR = 18;
     const particles: Particle[] = [
       ...Array.from({ length: FAR  }, () => ({
         x: R(0, 1440), y: R(0, 900),
@@ -264,19 +295,38 @@ function AnimatedBackgroundCanvas() {
   );
 }
 
-// ── Export — prefers-reduced-motion gate ──────────────────────────────────────
-// Users who opt out of motion get a zero-cost static gradient.
-// All other users get the full canvas animation, memoized.
+// ── Export — three-way gate ───────────────────────────────────────────────────
+//  1. prefers-reduced-motion  →  StaticBackground   (minimal CSS gradient)
+//  2. Mobile ≤ 768 px         →  MobileStaticBackground (rich frozen CSS)
+//  3. Desktop                 →  AnimatedBackgroundCanvas (full canvas animation)
 const AnimatedBackgroundCanvasMemo = memo(AnimatedBackgroundCanvas);
 
 export default function AnimatedBackground() {
+  // Detect mobile once on mount — avoids SSR mismatch and keeps hook stable.
+  const [isMobile, setIsMobile] = useState<boolean | null>(null);
+
+  useEffect(() => {
+    const mq = window.matchMedia('(max-width: 768px)');
+    setIsMobile(mq.matches);
+
+    // Keep in sync if the user rotates/resizes across the breakpoint.
+    const handler = (e: MediaQueryListEvent) => setIsMobile(e.matches);
+    mq.addEventListener('change', handler);
+    return () => mq.removeEventListener('change', handler);
+  }, []);
+
+  // prefers-reduced-motion gate (checked synchronously — no flicker risk)
   const prefersReduced =
     typeof window !== 'undefined' &&
     window.matchMedia('(prefers-reduced-motion: reduce)').matches;
 
-  if (prefersReduced) {
-    return <StaticBackground />;
-  }
+  if (prefersReduced) return <StaticBackground />;
+
+  // While the media-query result resolves (one paint), render nothing to avoid
+  // a flash of the canvas on mobile before we know the viewport size.
+  if (isMobile === null) return null;
+
+  if (isMobile) return <MobileStaticBackground />;
 
   return <AnimatedBackgroundCanvasMemo />;
 }
